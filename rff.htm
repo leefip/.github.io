@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>Animation radar</title>
+    
+    <SCRIPT LANGUAGE="JavaScript">
+    
+        function ImgDest(nImg)
+	    {
+	        var cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-120.png';
+    	    
+	        switch (nImg)
+	        {
+	            case 0 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-120.png'; break;
+	            case 1 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-105.png'; break;
+	            case 2 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-90.png'; break;
+	            case 3 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-75.png'; break;
+	            case 4 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-60.png'; break;
+	            case 5 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-45.png'; break;
+	            case 6 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-30.png'; break;
+	            case 7 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations-15.png'; break;
+	            case 8 : cSrc = 'http://www.meteo60.fr/radars/radar-precipitations.png'; break;
+	        }
+    	    
+            IdImage.src = cSrc;
+    	    
+	    }
+    
+    </SCRIPT>
+</head>
+
+<BODY leftmargin=0 topmargin=0 bottommargin=0 marginwidth=0 marginheight=0 SCROLL="NO" BGCOLOR="#FFFFFF">
+
+            <A HREF="#" onClick="ImgDest(0);return(false)">120</A>
+            <A HREF="#" onClick="ImgDest(1);return(false)">105</A>
+            <A HREF="#" onClick="ImgDest(2);return(false)"> 90</A>
+            <A HREF="#" onClick="ImgDest(3);return(false)"> 75</A>
+            <A HREF="#" onClick="ImgDest(4);return(false)"> 60</A>
+            <A HREF="#" onClick="ImgDest(5);return(false)"> 45</A>
+            <A HREF="#" onClick="ImgDest(6);return(false)"> 30</A>
+            <A HREF="#" onClick="ImgDest(7);return(false)"> 15</A>
+            <A HREF="#" onClick="ImgDest(8);return(false)">FIN</A>
+            
+            <br />
+            <IMG Id="IdImage" SRC="http://www.meteo60.fr/radars/radar-precipitations.png" BORDER=0 ALT=Menu NAME=defil>
+            <br />
+
+            <A HREF="#" onClick="ImgDest(0);return(false)">120</A>
+            <A HREF="#" onClick="ImgDest(1);return(false)">105</A>
+            <A HREF="#" onClick="ImgDest(2);return(false)"> 90</A>
+            <A HREF="#" onClick="ImgDest(3);return(false)"> 75</A>
+            <A HREF="#" onClick="ImgDest(4);return(false)"> 60</A>
+            <A HREF="#" onClick="ImgDest(5);return(false)"> 45</A>
+            <A HREF="#" onClick="ImgDest(6);return(false)"> 30</A>
+            <A HREF="#" onClick="ImgDest(7);return(false)"> 15</A>
+            <A HREF="#" onClick="ImgDest(8);return(false)">FIN</A>
+            
+
+</BODY>
+</html>

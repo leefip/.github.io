@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Animation Satellite France</title>
+
+
+
+<SCRIPT LANGUAGE="JavaScript">
+
+var dDate = new Date();
+
+var nH = dDate.getHours();
+var nM = dDate.getMinutes();
+
+if      (0  <= nM && nM < 15) nM = 0;
+else if (15 <= nM && nM < 30) nM = 15;
+else if (30 <= nM && nM < 45) nM = 30;
+else if (45 <= nM && nM < 60) nM = 45;
+
+var bStoped = false;
+var nHourMin = nH-4;
+var nHourMax = nH;
+var nMMax = nM;
+
+
+
+var cImage = 'http://meteociel.fr/temps-reel/satellite/sat2fr';
+
+var imgPath = new Array;
+var img = null;
+var nImg = -1;
+var nImgCount = nImg+1;
+
+    
+    /*
+    tmpImage = new Image();
+    
+    tmpImage.src = "http://meteociel.fr/temps-reel/satellite/sat2fr-16-0.jpg"
+    
+    cDateUpdate = tmpImage.fileUpdatedDate;
+    dDateUpdate = new Date(cDateUpdate);
+    
+    dToDay = new Date();
+    
+    if (parseInt(tmpImage.fileSize) < 0) 
+    {
+        alert(tmpImage.fileSize);
+    }
+    
+    if (dDateUpdate.getDay() != (dToDay).getDay())
+    {
+        alert("diff");
+        //xxx.xx = xxx.yyy;
+    }
+    else
+    {
+        alert("égales");
+    }
+    */
+    
+    nImg = 0;
+
+    DefinitListeImages();
+    
+	/*
+	i0 = new Image;
+	i0.src = cImage + '-12-0.jpg';
+	imgPath[0] = i0.src;
+	
+	i1 = new Image;
+	i1.src = cImage + '-12-15.jpg';
+	imgPath[1] = i1.src;
+	*/
+
+
+
+
+
+function StartAnim()
+{
+	document.write('<A NAME="refimg" HREF="" ><IMG SRC="" BORDER=0 ALT=Image NAME=defil></A>');
+	defilimg()
+}
+
+function DefinitListeImages()
+{
+
+    nH = nHourMin;
+    nImg = -1;
+    
+    while ( nH < nHourMax || nM < nMMax )
+    {
+        nM += 15;
+        if (nM == 60)
+        {
+            nH += 1;
+            nM = 0;
+        }
+        
+	    img = new Image();
+	    //img.onError=isBad;
+	    
+	    img.src = cImage + '-' + nH.toString() + '-'+ nM.toString() +'.jpg';
+	    
+        var cDateUpdate = img.fileUpdatedDate;
+        var dDateUpdate = new Date(cDateUpdate);
+    
+        var dToDay = new Date();
+    
+        //var bExists = (parseInt(img.fileSize) > 0); 
+        var bDateOk = (dDateUpdate.getDay() == (dToDay).getDay());
+        
+        //if (bExists && bDateOk) 
+        
+        if (bDateOk) 
+        {
+	        nImg += 1;
+	        imgPath[nImg] = img.src;
+	        /*
+	        if (img.src == "http://meteociel.fr/temps-reel/satellite/sat2fr-16-0.jpg")
+	        {
+	            alert(bDateOk.toString());
+	            alert(nImg.toString());
+	        }
+	        */
+	    }
+	    
+	    
+	    
+    }
+    
+    nImgCount = nImg+1;
+    
+    //alert(img.src);
+    
+    nImg = 0;
+}
+    
+function isBad() {
+    alert('That image does no exist!');
+}
+    
+function defilimg()
+{
+	if (nImgCount >= 0)
+	{
+        if (nImg < 0 || nImg > nImgCount-1)
+	    {
+	        nImg = 0;
+	    }
+    	
+    	var cImage = imgPath[nImg];
+    	if (cImage != undefined)
+    	{
+	        document.defil.src = cImage;
+	        refimg.href = cImage;
+	    }
+	    if (imgPath[nImg] == "http://meteociel.fr/temps-reel/satellite/sat2fr-16-0.jpg")
+	    {
+	        //alert("ok");
+	    }
+	    
+	    //if (bStoped) xxx.eef = ezkljsdf;
+	    
+	    var cTimer = txtTimer.value;
+	    var nTimer = parseInt(cTimer);
+	    
+	    if (nTimer < 50 || nTimer > 5000) nTimer = 400;
+	    
+	    //nTimer = 300;
+	    
+	    
+	    
+	    if (!bStoped) tempo3 = setTimeout("defilimg()",nTimer);
+    	
+	    nImg++;
+	}
+}
+	
+	
+function HMinus()	
+{
+    var cHours = txtHours.value;
+    var nHours = parseInt(cHours);
+    
+    if (nHours < 1 || nHours > 10) nHours = 3;
+    
+    nHours -= 1;
+    
+    if (nHours < 1) nHours = 1;
+    
+    txtHours.value = nHours.toString();
+
+    nHourMin = nHourMax-nHours;
+    DefinitListeImages();    
+}
+
+function HPlus()	
+{
+    var cHours = txtHours.value;
+    var nHours = parseInt(cHours);
+    
+    if (nHours < 1 || nHours > 10) nHours = 3;
+    
+    nHours += 1;
+    
+    if (nHours > 10) nHours = 10;
+    
+    txtHours.value = nHours.toString();
+    
+    nHourMin = nHourMax-nHours;
+    DefinitListeImages();
+}
+
+function Minus()	
+{
+    var cTimer = txtTimer.value;
+    var nTimer = parseInt(cTimer);
+    
+    if (nTimer < 50 || nTimer > 5000) nTimer = 400;
+    
+    if (nTimer <= 100) 
+        nTimer -= 50;
+    else
+        nTimer -= 100;
+    
+    if (nTimer < 50) nTimer = 50;
+    
+    txtTimer.value = nTimer.toString();
+}
+
+function Plus()	
+{
+    var cTimer = txtTimer.value;
+    var nTimer = parseInt(cTimer);
+    
+    if (nTimer < 50 || nTimer > 5000) nTimer = 400;
+    
+    if (nTimer < 100) 
+        nTimer += 50;
+    else
+        nTimer += 100;
+    
+    if (nTimer > 5000) nTimer = 5000;
+    
+    txtTimer.value = nTimer.toString();
+}
+
+function Stop()
+{
+    bStoped = true;
+    clearTimeout(tempo3);
+}
+
+function Start()
+{
+    bStoped = false;
+    clearTimeout(tempo3);
+    defilimg();
+}
+
+function Prev()
+{
+    Stop();
+    nImg -= 2;
+    if (nImg < 0) nImg = nImgCount-2;
+    defilimg();
+}
+
+function Next()
+{
+    Stop();
+    defilimg();
+}
+	
+function Begin()
+{
+    Stop();
+    nImg = -1;
+    defilimg();
+}
+
+function End()
+{
+    Stop();
+    nImg = nImgCount - 1;
+    defilimg();
+}
+	
+</SCRIPT>
+<style type="text/css">
+<!--
+.Style4 {font-size: 12px}
+-->
+</style>
+</head>
+
+<BODY leftmargin=0 topmargin=0 bottommargin=0 marginwidth=0 marginheight=0 SCROLL="NO" BGCOLOR="#FFFFFF">
+
+    <input id="txtHours" type="text"  style="width:50px" value="4" /> hours
+    <input id="btnHminus" type="button" value="-"  onclick="HMinus()"/>
+    <input id="btnHplus" type="button" value="+" onclick="HPlus()"/>
+    
+    <input id="txtTimer" type="text"  style="width:50px" value="400" /> ms
+    <input id="btnMinus" type="button" value="-"  onclick="Minus()"/>
+    <input id="btnPlus" type="button" value="+" onclick="Plus()"/>
+    
+    <input id="btnStop" type="button" value="Stop"  onclick="Stop()"/>
+    <input id="btnStart" type="button" value="Start" onclick="Start()"/>
+    
+    <input id="btnDeb" type="button" value="Begin" onclick="Begin()"/>
+    <input id="btnPrev" type="button" value="Prev" onclick="Prev()"/>
+    <input id="btnNext" type="button" value="Next" onclick="Next()"/>
+    <input id="btnEnd" type="button" value="End" onclick="End()"/>
+    
+<br>
+
+<a name="test" href=""></a>
+
+<SCRIPT LANGUAGE="JavaScript">
+StartAnim();
+</SCRIPT>
+</body>
+</html>
